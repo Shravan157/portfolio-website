@@ -411,83 +411,109 @@ st.markdown("""
 .pill-green { color: var(--green);  border-color: rgba(52,211,153,0.3);  background: rgba(52,211,153,0.07); }
 .pill:hover { transform: translateY(-1px); filter: brightness(1.2); }
 
-/* ─── Projects ─── */
-.project-grid {
+/* ─── Bento Project Grid ─── */
+@keyframes dash-flow {
+  to { stroke-dashoffset: -20; }
+}
+@keyframes node-pulse {
+  0%,100% { r: 6; opacity: 0.7; }
+  50%      { r: 8; opacity: 1;   }
+}
+
+.bento {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.25rem;
 }
-.project-card {
+.bento-card {
   background: var(--bg-1);
   border: 1px solid var(--border);
+  border-top: 2px solid var(--ca, var(--gold));
   border-radius: var(--radius-lg);
   padding: 1.75rem;
-  transition: all 0.3s;
   position: relative;
   overflow: hidden;
+  transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
+  min-height: 280px;
 }
-.project-card::after {
+.bento-card::before {
   content: '';
   position: absolute;
-  inset: 0;
-  border-radius: var(--radius-lg);
-  padding: 1px;
-  background: linear-gradient(135deg, rgba(212,175,55,0) 0%, rgba(212,175,55,0.4) 50%, rgba(0,229,204,0) 100%);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0;
+  top: 0; right: 0;
+  width: 220px; height: 220px;
+  background: radial-gradient(circle at top right, var(--cg, rgba(212,175,55,0.06)) 0%, transparent 65%);
+  pointer-events: none;
   transition: opacity 0.3s;
 }
-.project-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 48px rgba(0,0,0,0.5);
+.bento-card::after {
+  content: var(--cn, "01");
+  position: absolute;
+  bottom: -1.5rem; right: 1.25rem;
+  font-family: var(--font-head);
+  font-size: 8rem;
+  font-weight: 800;
+  color: var(--ca, var(--gold));
+  opacity: 0.035;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -4px;
+}
+.bento-card:hover {
+  transform: translateY(-5px);
   background: var(--bg-2);
+  border-color: var(--ca, var(--gold));
+  box-shadow: 0 24px 56px rgba(0,0,0,0.55), 0 0 0 1px var(--ca, var(--gold));
 }
-.project-card:hover::after { opacity: 1; }
-.project-card.featured {
-  grid-column: span 2;
+.bento-card:hover::before { opacity: 1.6; }
+
+/* Per-card accent palette */
+.c-cyan   { --ca:#00e5cc; --cg:rgba(0,229,204,0.07);   --cn:"01"; }
+.c-gold   { --ca:#d4af37; --cg:rgba(212,175,55,0.07);  --cn:"02"; }
+.c-purple { --ca:#a78bfa; --cg:rgba(167,139,250,0.07); --cn:"03"; }
+.c-rose   { --ca:#fb7185; --cg:rgba(251,113,133,0.07); --cn:"04"; }
+.c-green  { --ca:#34d399; --cg:rgba(52,211,153,0.07);  --cn:"05"; }
+
+/* Featured card (2-col) */
+.bento-feat { grid-column: span 2; }
+.bento-feat-inner {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  grid-template-columns: 1fr 0.85fr;
+  gap: 1.75rem;
+  flex: 1;
 }
-.project-featured-content { display: flex; flex-direction: column; }
-.project-featured-visual {
-  background: var(--bg-3);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 1.5rem;
+.bento-feat-content { display: flex; flex-direction: column; }
+.bento-feat-visual {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--cyan);
-  line-height: 1.9;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
   overflow: hidden;
   position: relative;
 }
-.project-featured-visual::before {
+.bento-feat-visual::before {
   content: '';
   position: absolute;
-  top: -20px; right: -20px;
-  width: 100px; height: 100px;
-  background: radial-gradient(circle, rgba(0,229,204,0.15) 0%, transparent 70%);
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(0,229,204,0.06) 0%, transparent 70%);
 }
-.kw  { color: var(--purple); }
-.fn  { color: var(--gold); }
-.str { color: var(--green); }
-.cm  { color: var(--text-3); }
-.num { color: var(--cyan); }
 
-.project-badge-wrap {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-  flex-wrap: wrap;
+/* Small domain icon top-right */
+.bento-icon {
+  position: absolute;
+  top: 1.25rem; right: 1.25rem;
+  width: 36px; height: 36px;
+  opacity: 0.18;
+  transition: opacity 0.3s;
 }
+.bento-card:hover .bento-icon { opacity: 0.35; }
+
+/* Shared card parts */
 .badge {
   padding: 0.22rem 0.7rem;
   border-radius: 999px;
@@ -503,31 +529,32 @@ st.markdown("""
 .badge-green  { background: rgba(52,211,153,0.12); color: var(--green);  border: 1px solid rgba(52,211,153,0.25); }
 .badge-rose   { background: rgba(251,113,133,0.12);color: var(--rose);   border: 1px solid rgba(251,113,133,0.25); }
 
-.project-title {
+.p-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.p-title {
   font-family: var(--font-head);
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--text-1);
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.35rem;
   letter-spacing: -0.3px;
   line-height: 1.3;
 }
-.project-date {
+.p-date {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   color: var(--text-3);
-  margin-bottom: 0.85rem;
   letter-spacing: 0.5px;
+  margin-bottom: 0.85rem;
 }
-.project-desc {
+.p-desc {
   color: var(--text-2);
-  font-size: 0.88rem;
+  font-size: 0.87rem;
   line-height: 1.75;
-  flex: 1;
   font-weight: 300;
   margin-bottom: 1.25rem;
+  flex: 1;
 }
-.project-chips {
+.p-chips {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
@@ -537,26 +564,29 @@ st.markdown("""
   padding: 0.22rem 0.65rem;
   background: var(--bg-3);
   border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
+  border-radius: 6px;
   font-family: var(--font-mono);
   font-size: 0.7rem;
   color: var(--text-3);
   transition: all 0.2s;
 }
-.chip:hover { border-color: rgba(212,175,55,0.3); color: var(--gold); }
-.project-link {
+.bento-card:hover .chip {
+  border-color: color-mix(in srgb, var(--ca) 30%, transparent);
+  color: var(--ca);
+}
+.p-link {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  color: var(--gold);
+  color: var(--ca, var(--gold));
   text-decoration: none;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 600;
   font-family: var(--font-mono);
   transition: all 0.2s;
   margin-top: auto;
 }
-.project-link:hover { color: var(--gold-light); gap: 0.65rem; }
+.p-link:hover { opacity: 0.75; gap: 0.65rem; }
 
 /* ─── Timeline ─── */
 .timeline { display: flex; flex-direction: column; gap: 1.25rem; }
@@ -729,9 +759,10 @@ st.markdown("""
 @media (max-width: 768px) {
   .block-container { padding: 0 1rem 4rem !important; }
   .hero-name { font-size: 2.5rem; }
-  .project-grid { grid-template-columns: 1fr; }
-  .project-card.featured { grid-column: span 1; grid-template-columns: 1fr; }
-  .project-featured-visual { display: none; }
+  .bento { grid-template-columns: 1fr; }
+  .bento-feat { grid-column: span 1; }
+  .bento-feat-inner { grid-template-columns: 1fr; }
+  .bento-feat-visual { display: none; }
   .stats-strip { grid-template-columns: repeat(2,1fr); }
   .contact-grid { grid-template-columns: repeat(2,1fr); }
   .skills-grid { grid-template-columns: 1fr 1fr; }
@@ -866,132 +897,197 @@ st.markdown("""
 <div class="section">
   <div class="section-label">Work</div>
   <h2 class="section-title">Featured Projects</h2>
-  <p class="section-sub">Across AI, full-stack, mobile, and machine learning</p>
+  <p class="section-sub">Across healthcare AI, fintech, edtech, and machine learning</p>
 
-  <div class="project-grid">
+  <div class="bento">
 
-    <!-- Featured: MedoraX -->
-    <div class="project-card featured">
-      <div class="project-featured-content">
-        <div class="project-badge-wrap">
-          <span class="badge badge-cyan">Healthcare AI</span>
-          <span class="badge badge-gold">Multimodal</span>
+    <!-- ═══ 01 MedoraX — Featured 2-col ═══ -->
+    <div class="bento-card bento-feat c-cyan">
+      <div class="bento-feat-inner">
+
+        <div class="bento-feat-content">
+          <div class="p-badges">
+            <span class="badge badge-cyan">Healthcare AI</span>
+            <span class="badge badge-gold">Multimodal</span>
+          </div>
+          <div class="p-title">MedoraX AI — Clinical AI Assistant</div>
+          <div class="p-date">OCT 2025 — NOV 2026</div>
+          <p class="p-desc">
+            A multimodal clinical AI assistant supporting voice, image, and text inputs.
+            Transcribes symptoms via Whisper-large-v3, analyzes medical images via Llama-4-scout,
+            and generates structured diagnostic responses using Llama-3.3-70b.
+            Multilingual support in English, Hindi, and Marathi with GPS-based hospital finder
+            and real-time AQI monitoring. Deployed on Hugging Face Spaces with 4–7s response times.
+          </p>
+          <div class="p-chips">
+            <span class="chip">Python</span><span class="chip">Gradio</span>
+            <span class="chip">Groq API</span><span class="chip">Whisper-v3</span>
+            <span class="chip">Llama-4</span><span class="chip">Google Maps</span>
+          </div>
+          <a href="https://github.com/Shravan157/MedX-AI-Clinical-Assistant" target="_blank" class="p-link">
+            View on GitHub &#8594;
+          </a>
         </div>
-        <div class="project-title">🏥 MedoraX AI — Clinical AI Assistant</div>
-        <div class="project-date">Oct 2025 — Nov 2026</div>
-        <p class="project-desc">
-          A multimodal clinical AI assistant supporting voice, image, and text inputs. Transcribes symptoms via 
-          Whisper-large-v3, analyzes medical images via Llama-4-scout, and generates structured diagnostic responses 
-          using Llama-3.3-70b. Multilingual support in English, Hindi, and Marathi with GPS-based hospital finder 
-          and real-time AQI monitoring. Deployed on Hugging Face Spaces with 4–7s response times.
-        </p>
-        <div class="project-chips">
-          <span class="chip">Python</span><span class="chip">Gradio</span>
-          <span class="chip">Groq API</span><span class="chip">Google Maps API</span>
-          <span class="chip">Whisper</span><span class="chip">Llama-4</span>
+
+        <div class="bento-feat-visual">
+          <svg viewBox="0 0 210 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:210px;">
+            <defs>
+              <filter id="glow-c">
+                <feGaussianBlur stdDeviation="2.5" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <!-- Input labels -->
+            <text x="32" y="11" text-anchor="middle" font-size="7" fill="rgba(0,229,204,0.45)" font-family="monospace" letter-spacing="1">INPUTS</text>
+            <!-- Voice node -->
+            <circle cx="32" cy="45" r="20" fill="rgba(0,229,204,0.06)" stroke="#00e5cc" stroke-width="1.2" opacity="0.7"/>
+            <text x="32" y="42" text-anchor="middle" font-size="9" fill="#00e5cc" font-weight="600">VOICE</text>
+            <text x="32" y="53" text-anchor="middle" font-size="7" fill="rgba(0,229,204,0.55)">Whisper</text>
+            <!-- Image node -->
+            <circle cx="32" cy="100" r="20" fill="rgba(0,229,204,0.06)" stroke="#00e5cc" stroke-width="1.2" opacity="0.7"/>
+            <text x="32" y="97" text-anchor="middle" font-size="9" fill="#00e5cc" font-weight="600">IMAGE</text>
+            <text x="32" y="108" text-anchor="middle" font-size="7" fill="rgba(0,229,204,0.55)">Llama-4</text>
+            <!-- Text node -->
+            <circle cx="32" cy="155" r="20" fill="rgba(0,229,204,0.06)" stroke="#00e5cc" stroke-width="1.2" opacity="0.7"/>
+            <text x="32" y="152" text-anchor="middle" font-size="9" fill="#00e5cc" font-weight="600">TEXT</text>
+            <text x="32" y="163" text-anchor="middle" font-size="7" fill="rgba(0,229,204,0.55)">Direct</text>
+            <!-- Dashed lines to hub -->
+            <line x1="52" y1="55" x2="98" y2="92" stroke="#00e5cc" stroke-width="1" opacity="0.35" stroke-dasharray="5,4">
+              <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="2s" repeatCount="indefinite"/>
+            </line>
+            <line x1="52" y1="100" x2="98" y2="100" stroke="#00e5cc" stroke-width="1" opacity="0.35" stroke-dasharray="5,4">
+              <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="2s" repeatCount="indefinite"/>
+            </line>
+            <line x1="52" y1="145" x2="98" y2="108" stroke="#00e5cc" stroke-width="1" opacity="0.35" stroke-dasharray="5,4">
+              <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="2s" repeatCount="indefinite"/>
+            </line>
+            <!-- AI Hub -->
+            <circle cx="118" cy="100" r="30" fill="rgba(0,229,204,0.08)" stroke="#00e5cc" stroke-width="1.5" filter="url(#glow-c)"/>
+            <circle cx="118" cy="100" r="22" fill="none" stroke="rgba(0,229,204,0.3)" stroke-width="0.8" stroke-dasharray="3,3"/>
+            <text x="118" y="96" text-anchor="middle" font-size="11" fill="#00e5cc" font-weight="700">AI</text>
+            <text x="118" y="109" text-anchor="middle" font-size="7.5" fill="rgba(0,229,204,0.6)">Engine</text>
+            <!-- Line to output -->
+            <line x1="148" y1="100" x2="168" y2="100" stroke="#00e5cc" stroke-width="1.5" opacity="0.5" stroke-dasharray="5,4">
+              <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1.5s" repeatCount="indefinite"/>
+            </line>
+            <!-- Output -->
+            <rect x="168" y="78" width="38" height="44" rx="9" fill="rgba(0,229,204,0.07)" stroke="#00e5cc" stroke-width="1.2" opacity="0.75"/>
+            <text x="187" y="97" text-anchor="middle" font-size="9" fill="#00e5cc" font-weight="700">Dx</text>
+            <text x="187" y="109" text-anchor="middle" font-size="6.5" fill="rgba(0,229,204,0.55)">Report</text>
+            <!-- Output label -->
+            <text x="187" y="136" text-anchor="middle" font-size="7" fill="rgba(0,229,204,0.45)" font-family="monospace" letter-spacing="1">OUTPUT</text>
+          </svg>
         </div>
-        <a href="https://github.com/Shravan157/MedX-AI-Clinical-Assistant" target="_blank" class="project-link">
-          View on GitHub →
-        </a>
-      </div>
-      <div class="project-featured-visual">
-        <div>
-          <span class="cm"># medorax_ai.py</span><br>
-          <span class="kw">class</span> <span class="fn">ClinicalAI</span>:<br>
-          &nbsp;&nbsp;<span class="fn">def</span> <span class="fn">analyze</span>(self, inp):<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> inp.type == <span class="str">"voice"</span>:<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text = whisper.<span class="fn">transcribe</span>()<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">elif</span> inp.type == <span class="str">"image"</span>:<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text = llama4.<span class="fn">vision</span>()<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;diagnosis = llama3.<span class="fn">generate</span>(<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text, lang=<span class="str">"auto"</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;)<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> diagnosis
-        </div>
+
       </div>
     </div>
 
-    <!-- SahayLoan -->
-    <div class="project-card">
-      <div class="project-badge-wrap">
+    <!-- ═══ 02 SahayLoan ═══ -->
+    <div class="bento-card c-gold">
+      <!-- Domain icon: coin/rupee -->
+      <svg class="bento-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="18" cy="18" r="16" stroke="#d4af37" stroke-width="2"/>
+        <text x="18" y="23" text-anchor="middle" font-size="14" fill="#d4af37" font-weight="700">&#8377;</text>
+      </svg>
+      <div class="p-badges">
         <span class="badge badge-gold">FinTech</span>
-        <span class="badge badge-green">AI Credit Scoring</span>
+        <span class="badge badge-green">AI Scoring</span>
       </div>
-      <div class="project-title">🏦 SahayLoan — Micro-Loan Platform</div>
-      <div class="project-date">Jan 2026 — Present</div>
-      <p class="project-desc">
-        Full-stack micro-lending platform (loans up to ₹1,00,000) with Flutter frontend, FastAPI backend, 
-        AI credit scoring via Random Forest, digital KYC with Tesseract OCR, and Stripe EMI payments. 
+      <div class="p-title">SahayLoan — Micro-Loan Platform</div>
+      <div class="p-date">JAN 2026 — PRESENT</div>
+      <p class="p-desc">
+        Full-stack micro-lending platform (up to &#8377;1,00,000) with Flutter frontend, FastAPI backend,
+        Random Forest credit scoring, Tesseract KYC, and Stripe EMI payments.
         Multi-role system with Firebase Auth and Firestore.
       </p>
-      <div class="project-chips">
+      <div class="p-chips">
         <span class="chip">Flutter</span><span class="chip">FastAPI</span>
         <span class="chip">Scikit-learn</span><span class="chip">Firebase</span>
         <span class="chip">Tesseract</span><span class="chip">Stripe</span>
       </div>
-      <a href="https://github.com/Shravan157/Sahay-Loan" target="_blank" class="project-link">View on GitHub →</a>
+      <a href="https://github.com/Shravan157/Sahay-Loan" target="_blank" class="p-link">View on GitHub &#8594;</a>
     </div>
 
-    <!-- SikshaSetu -->
-    <div class="project-card">
-      <div class="project-badge-wrap">
+    <!-- ═══ 03 SikshaSetu ═══ -->
+    <div class="bento-card c-purple">
+      <!-- Domain icon: graduation cap outline -->
+      <svg class="bento-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="18,4 34,13 18,22 2,13" stroke="#a78bfa" stroke-width="1.8" fill="none"/>
+        <path d="M8 16 L8 26 Q18 31 28 26 L28 16" stroke="#a78bfa" stroke-width="1.8" fill="none" stroke-linejoin="round"/>
+        <line x1="34" y1="13" x2="34" y2="22" stroke="#a78bfa" stroke-width="1.8"/>
+      </svg>
+      <div class="p-badges">
         <span class="badge badge-purple">Full-Stack</span>
         <span class="badge badge-cyan">EdTech</span>
       </div>
-      <div class="project-title">🎓 SikshaSetu — Rural Education Platform</div>
-      <div class="project-date">Jan 2025 — Apr 2025</div>
-      <p class="project-desc">
-        Education platform bridging the digital divide for rural communities. RBAC with Spring Security + 
-        JWT/OAuth 2.0, optimized MySQL schema, React.js frontend, and ZEGOCLOUD real-time video SDK 
-        for virtual classrooms.
+      <div class="p-title">SikshaSetu — Rural Education Platform</div>
+      <div class="p-date">JAN 2025 — APR 2025</div>
+      <p class="p-desc">
+        Education platform bridging the digital divide. RBAC with Spring Security + JWT/OAuth 2.0,
+        optimized MySQL schema, React.js frontend, and ZEGOCLOUD real-time video SDK for virtual classrooms.
       </p>
-      <div class="project-chips">
+      <div class="p-chips">
         <span class="chip">React</span><span class="chip">Spring Boot</span>
-        <span class="chip">Spring Security</span><span class="chip">JWT</span>
-        <span class="chip">MySQL</span><span class="chip">ZEGOCLOUD</span>
+        <span class="chip">JWT</span><span class="chip">MySQL</span>
+        <span class="chip">ZEGOCLOUD</span>
       </div>
-      <a href="https://github.com/Shravan157/SikshaSetu_Edu_App" target="_blank" class="project-link">View on GitHub →</a>
+      <a href="https://github.com/Shravan157/SikshaSetu_Edu_App" target="_blank" class="p-link">View on GitHub &#8594;</a>
     </div>
 
-    <!-- AI E-Commerce -->
-    <div class="project-card">
-      <div class="project-badge-wrap">
-        <span class="badge badge-gold">AI-Powered</span>
+    <!-- ═══ 04 AI E-Commerce ═══ -->
+    <div class="bento-card c-rose">
+      <!-- Domain icon: vector DB / nodes -->
+      <svg class="bento-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="10" cy="10" r="5" stroke="#fb7185" stroke-width="1.8"/>
+        <circle cx="26" cy="10" r="5" stroke="#fb7185" stroke-width="1.8"/>
+        <circle cx="18" cy="26" r="5" stroke="#fb7185" stroke-width="1.8"/>
+        <line x1="14" y1="12" x2="22" y2="12" stroke="#fb7185" stroke-width="1.4"/>
+        <line x1="12" y1="14" x2="16" y2="22" stroke="#fb7185" stroke-width="1.4"/>
+        <line x1="24" y1="14" x2="20" y2="22" stroke="#fb7185" stroke-width="1.4"/>
+      </svg>
+      <div class="p-badges">
         <span class="badge badge-rose">E-Commerce</span>
+        <span class="badge badge-gold">Spring AI</span>
       </div>
-      <div class="project-title">🛒 AI E-Commerce Platform</div>
-      <div class="project-date">Oct 2024 — Jan 2025</div>
-      <p class="project-desc">
-        Intelligent e-commerce backend with AI-driven product recommendations using Spring AI and 
-        vector similarity search via Redis Vector DB, generative AI chatbot for real-time support, 
-        and AI-powered image generation pipeline.
+      <div class="p-title">AI-Powered E-Commerce Platform</div>
+      <div class="p-date">OCT 2024 — JAN 2025</div>
+      <p class="p-desc">
+        Intelligent backend with Spring AI product recommendations, Redis Vector DB similarity search,
+        generative AI chatbot for real-time support, and an AI-powered image generation pipeline.
       </p>
-      <div class="project-chips">
+      <div class="p-chips">
         <span class="chip">React</span><span class="chip">Spring Boot</span>
-        <span class="chip">Spring AI</span><span class="chip">Redis Vector DB</span>
-        <span class="chip">Tailwind CSS</span>
+        <span class="chip">Spring AI</span><span class="chip">Redis VectorDB</span>
+        <span class="chip">Tailwind</span>
       </div>
-      <a href="https://github.com/Shravan157" target="_blank" class="project-link">View on GitHub →</a>
+      <a href="https://github.com/Shravan157" target="_blank" class="p-link">View on GitHub &#8594;</a>
     </div>
 
-    <!-- Zomato Sentiment -->
-    <div class="project-card">
-      <div class="project-badge-wrap">
+    <!-- ═══ 05 Zomato NLP ═══ -->
+    <div class="bento-card c-green">
+      <!-- Domain icon: bar chart -->
+      <svg class="bento-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4"  y="22" width="6" height="10" rx="2" stroke="#34d399" stroke-width="1.8"/>
+        <rect x="13" y="14" width="6" height="18" rx="2" stroke="#34d399" stroke-width="1.8"/>
+        <rect x="22" y="6"  width="6" height="26" rx="2" stroke="#34d399" stroke-width="1.8"/>
+        <line x1="2" y1="33" x2="34" y2="33" stroke="#34d399" stroke-width="1.5" opacity="0.5"/>
+      </svg>
+      <div class="p-badges">
         <span class="badge badge-green">ML / NLP</span>
       </div>
-      <div class="project-title">🍽️ Zomato Sentiment Analysis</div>
-      <div class="project-date">Data Science Project</div>
-      <p class="project-desc">
-        End-to-end NLP pipeline classifying 10,000+ restaurant reviews. 15 EDA visualizations, hypothesis 
-        testing, TF-IDF vectorization, and model comparison (Logistic Regression, Random Forest, Naive Bayes). 
-        Logistic Regression achieved the highest F1 score.
+      <div class="p-title">Zomato Sentiment Analysis</div>
+      <div class="p-date">DATA SCIENCE PROJECT</div>
+      <p class="p-desc">
+        End-to-end NLP pipeline classifying 10,000+ restaurant reviews. 15 EDA visualizations,
+        hypothesis testing, TF-IDF vectorization, and model comparison (Logistic Regression,
+        Random Forest, Naive Bayes) — highest F1 via Logistic Regression.
       </p>
-      <div class="project-chips">
+      <div class="p-chips">
         <span class="chip">Python</span><span class="chip">Scikit-learn</span>
         <span class="chip">NLTK</span><span class="chip">TF-IDF</span>
         <span class="chip">Matplotlib</span>
       </div>
-      <a href="https://github.com/Shravan157/Zomato-Restaurant-Review-Sentiment-Analysis" target="_blank" class="project-link">View on GitHub →</a>
+      <a href="https://github.com/Shravan157/Zomato-Restaurant-Review-Sentiment-Analysis" target="_blank" class="p-link">View on GitHub &#8594;</a>
     </div>
 
   </div>

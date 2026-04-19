@@ -967,6 +967,81 @@ st.markdown("""
 
 # ─── Footer ───
 st.markdown("""
+<style>
+.quote-section {
+    margin-top: 4rem;
+    padding: 3rem 2rem;
+    text-align: center;
+    position: relative;
+    border-top: 1px solid var(--glass-border);
+}
+.quote-section::before {
+    content: '"';
+    position: absolute;
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 5rem;
+    font-family: Georgia, serif;
+    color: var(--accent);
+    opacity: 0.12;
+    line-height: 1;
+    pointer-events: none;
+}
+.quote-text {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-style: italic;
+    color: var(--text-secondary);
+    line-height: 1.9;
+    max-width: 560px;
+    margin: 0 auto 0.75rem;
+    position: relative;
+    z-index: 1;
+}
+.quote-text .line-highlight {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--purple) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 600;
+    font-style: italic;
+}
+.quote-author {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 0.25rem;
+}
+.quote-author span {
+    color: var(--accent);
+    opacity: 0.7;
+}
+.footer {
+    text-align: center;
+    padding: 1.75rem 0 1.5rem;
+    border-top: 1px solid var(--glass-border);
+}
+.footer p {
+    font-family: var(--mono);
+    color: var(--text-muted);
+    font-size: 0.78rem;
+}
+.footer a { color: var(--accent); text-decoration: none; }
+</style>
+
+<div class="quote-section">
+    <p class="quote-text">
+        The woods are lovely, dark and deep,<br>
+        But I have promises to keep,<br>
+        And <span class="line-highlight">miles to go before I sleep,</span><br>
+        And miles to go before I sleep.
+    </p>
+    <div class="quote-author">— Robert Frost <span>· Stopping by Woods on a Snowy Evening</span></div>
+</div>
+
 <div class="footer">
     <p>Designed & built by <a href="https://github.com/Shravan157" target="_blank">Shravan Parthe</a> · 2026 · Made with ❤️ &amp; ☕</p>
 </div>

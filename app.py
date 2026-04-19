@@ -128,7 +128,7 @@ st.markdown("""
   color: var(--text-1);
   letter-spacing: -0.5px;
 }
-.nav-brand .dot { 
+.nav-brand .dot {
   display: inline-block;
   width: 8px; height: 8px;
   background: var(--gold);
@@ -412,14 +412,6 @@ st.markdown("""
 .pill:hover { transform: translateY(-1px); filter: brightness(1.2); }
 
 /* ─── Bento Project Grid ─── */
-@keyframes dash-flow {
-  to { stroke-dashoffset: -20; }
-}
-@keyframes node-pulse {
-  0%,100% { r: 6; opacity: 0.7; }
-  50%      { r: 8; opacity: 1;   }
-}
-
 .bento {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -570,9 +562,11 @@ st.markdown("""
   color: var(--text-3);
   transition: all 0.2s;
 }
+/* FIX: Replaced color-mix() with direct var for broader browser support */
 .bento-card:hover .chip {
-  border-color: color-mix(in srgb, var(--ca) 30%, transparent);
+  border-color: var(--ca);
   color: var(--ca);
+  opacity: 0.85;
 }
 .p-link {
   display: inline-flex;
@@ -683,7 +677,6 @@ st.markdown("""
   font-weight: 600;
   font-family: var(--font-mono);
   margin-top: 0.75rem;
-  display: inline-flex;
 }
 
 /* ─── Contact ─── */
@@ -795,11 +788,11 @@ st.markdown(f"""
   <h1 class="hero-name">
     Building the<br><span class="gradient-text">Future of Tech</span>
   </h1>
-  <div class="hero-subtitle">Full-Stack Engineer & AI/ML Developer</div>
+  <div class="hero-subtitle">Full-Stack Engineer &amp; AI/ML Developer</div>
   <p class="hero-desc">
-    Results-driven CS student with hands-on expertise in 
-    <strong>Java · Spring Boot · Python</strong> and cutting-edge AI/ML integration. 
-    I craft scalable, production-ready applications spanning 
+    Results-driven CS student with hands-on expertise in
+    <strong>Java · Spring Boot · Python</strong> and cutting-edge AI/ML integration.
+    I craft scalable, production-ready applications spanning
     <strong>fintech, healthcare, and edtech</strong> — bridging intelligent backend systems with real-world impact.
   </p>
   <div class="hero-cta">
@@ -830,7 +823,7 @@ st.markdown(f"""
   </div>
   <div class="stat-item">
     <div class="stat-num">1</div>
-    <div class="stat-lbl">Internship</div>
+    <div class="stat-lbl">Active Internship</div>
   </div>
 </div>
 """, unsafe_allow_html=True)
@@ -868,7 +861,7 @@ st.markdown("""
     </div>
     <div class="skill-cell">
       <span class="skill-cell-icon">🛠️</span>
-      <div class="skill-cell-name">Tools & Platforms</div>
+      <div class="skill-cell-name">Tools &amp; Platforms</div>
       <div class="pill-row">
         <span class="pill pill-purple">Docker</span>
         <span class="pill pill-purple">GitHub</span>
@@ -932,26 +925,21 @@ st.markdown("""
         <div class="bento-feat-visual">
           <svg viewBox="0 0 210 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:210px;">
             <defs>
-              <filter id="glow-c">
+              <filter id="glow-medorax">
                 <feGaussianBlur stdDeviation="2.5" result="blur"/>
                 <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
               </filter>
             </defs>
-            <!-- Input labels -->
             <text x="32" y="11" text-anchor="middle" font-size="7" fill="rgba(0,229,204,0.45)" font-family="monospace" letter-spacing="1">INPUTS</text>
-            <!-- Voice node -->
             <circle cx="32" cy="45" r="20" fill="rgba(0,229,204,0.06)" stroke="#00e5cc" stroke-width="1.2" opacity="0.7"/>
             <text x="32" y="42" text-anchor="middle" font-size="9" fill="#00e5cc" font-weight="600">VOICE</text>
             <text x="32" y="53" text-anchor="middle" font-size="7" fill="rgba(0,229,204,0.55)">Whisper</text>
-            <!-- Image node -->
             <circle cx="32" cy="100" r="20" fill="rgba(0,229,204,0.06)" stroke="#00e5cc" stroke-width="1.2" opacity="0.7"/>
             <text x="32" y="97" text-anchor="middle" font-size="9" fill="#00e5cc" font-weight="600">IMAGE</text>
             <text x="32" y="108" text-anchor="middle" font-size="7" fill="rgba(0,229,204,0.55)">Llama-4</text>
-            <!-- Text node -->
             <circle cx="32" cy="155" r="20" fill="rgba(0,229,204,0.06)" stroke="#00e5cc" stroke-width="1.2" opacity="0.7"/>
             <text x="32" y="152" text-anchor="middle" font-size="9" fill="#00e5cc" font-weight="600">TEXT</text>
             <text x="32" y="163" text-anchor="middle" font-size="7" fill="rgba(0,229,204,0.55)">Direct</text>
-            <!-- Dashed lines to hub -->
             <line x1="52" y1="55" x2="98" y2="92" stroke="#00e5cc" stroke-width="1" opacity="0.35" stroke-dasharray="5,4">
               <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="2s" repeatCount="indefinite"/>
             </line>
@@ -961,20 +949,16 @@ st.markdown("""
             <line x1="52" y1="145" x2="98" y2="108" stroke="#00e5cc" stroke-width="1" opacity="0.35" stroke-dasharray="5,4">
               <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="2s" repeatCount="indefinite"/>
             </line>
-            <!-- AI Hub -->
-            <circle cx="118" cy="100" r="30" fill="rgba(0,229,204,0.08)" stroke="#00e5cc" stroke-width="1.5" filter="url(#glow-c)"/>
+            <circle cx="118" cy="100" r="30" fill="rgba(0,229,204,0.08)" stroke="#00e5cc" stroke-width="1.5" filter="url(#glow-medorax)"/>
             <circle cx="118" cy="100" r="22" fill="none" stroke="rgba(0,229,204,0.3)" stroke-width="0.8" stroke-dasharray="3,3"/>
             <text x="118" y="96" text-anchor="middle" font-size="11" fill="#00e5cc" font-weight="700">AI</text>
             <text x="118" y="109" text-anchor="middle" font-size="7.5" fill="rgba(0,229,204,0.6)">Engine</text>
-            <!-- Line to output -->
             <line x1="148" y1="100" x2="168" y2="100" stroke="#00e5cc" stroke-width="1.5" opacity="0.5" stroke-dasharray="5,4">
               <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1.5s" repeatCount="indefinite"/>
             </line>
-            <!-- Output -->
             <rect x="168" y="78" width="38" height="44" rx="9" fill="rgba(0,229,204,0.07)" stroke="#00e5cc" stroke-width="1.2" opacity="0.75"/>
             <text x="187" y="97" text-anchor="middle" font-size="9" fill="#00e5cc" font-weight="700">Dx</text>
             <text x="187" y="109" text-anchor="middle" font-size="6.5" fill="rgba(0,229,204,0.55)">Report</text>
-            <!-- Output label -->
             <text x="187" y="136" text-anchor="middle" font-size="7" fill="rgba(0,229,204,0.45)" font-family="monospace" letter-spacing="1">OUTPUT</text>
           </svg>
         </div>
@@ -984,7 +968,6 @@ st.markdown("""
 
     <!-- ═══ 02 SahayLoan ═══ -->
     <div class="bento-card c-gold">
-      <!-- Domain icon: coin/rupee -->
       <svg class="bento-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="18" cy="18" r="16" stroke="#d4af37" stroke-width="2"/>
         <text x="18" y="23" text-anchor="middle" font-size="14" fill="#d4af37" font-weight="700">&#8377;</text>
@@ -1010,7 +993,6 @@ st.markdown("""
 
     <!-- ═══ 03 SikshaSetu ═══ -->
     <div class="bento-card c-purple">
-      <!-- Domain icon: graduation cap outline -->
       <svg class="bento-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
         <polygon points="18,4 34,13 18,22 2,13" stroke="#a78bfa" stroke-width="1.8" fill="none"/>
         <path d="M8 16 L8 26 Q18 31 28 26 L28 16" stroke="#a78bfa" stroke-width="1.8" fill="none" stroke-linejoin="round"/>
@@ -1036,7 +1018,6 @@ st.markdown("""
 
     <!-- ═══ 04 AI E-Commerce ═══ -->
     <div class="bento-card c-rose">
-      <!-- Domain icon: vector DB / nodes -->
       <svg class="bento-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="10" cy="10" r="5" stroke="#fb7185" stroke-width="1.8"/>
         <circle cx="26" cy="10" r="5" stroke="#fb7185" stroke-width="1.8"/>
@@ -1065,7 +1046,6 @@ st.markdown("""
 
     <!-- ═══ 05 Zomato NLP ═══ -->
     <div class="bento-card c-green">
-      <!-- Domain icon: bar chart -->
       <svg class="bento-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="4"  y="22" width="6" height="10" rx="2" stroke="#34d399" stroke-width="1.8"/>
         <rect x="13" y="14" width="6" height="18" rx="2" stroke="#34d399" stroke-width="1.8"/>
@@ -1140,7 +1120,7 @@ st.markdown("""
         <span class="tl-tag badge badge-cyan">In Progress</span>
       </div>
       <p style="color:var(--text-2); font-size:0.88rem; font-weight:300; line-height:1.7; margin-bottom:0.5rem;">
-        Pursuing B.Tech in Computer Science Engineering with specialization in Artificial Intelligence &amp; Machine Learning 
+        Pursuing B.Tech in Computer Science Engineering with specialization in Artificial Intelligence &amp; Machine Learning
         at Vishwaniketan's Institute of Management Entrepreneurship and Engineering Technology.
       </p>
       <span class="tl-cgpa">✦ CGPA: 7.5 / 10.0</span>

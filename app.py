@@ -568,7 +568,7 @@ h1.ht{
 <section id="stats">
   <div class="w">
     <div class="sg rev">
-      <div class="sb"><div class="sn">5+</div><div class="sl">Missions</div></div>
+      <div class="sb"><div class="sn">6+</div><div class="sl">Missions</div></div>
       <div class="sb"><div class="sn">7.5</div><div class="sl">CGPA</div></div>
       <div class="sb"><div class="sn">3rd</div><div class="sl">Year</div></div>
       <div class="sb"><div class="sn">2027</div><div class="sl">Graduation</div></div>
@@ -705,6 +705,23 @@ h1.ht{
           <div class="pi-ft">
             <div class="pi-tech"><span class="tt">Python</span><span class="tt">Scikit-learn</span><span class="tt">NLTK</span><span class="tt">TF-IDF</span><span class="tt">Pandas</span></div>
             <a href="https://github.com/Shravan157/Zomato-Restaurant-Review-Sentiment-Analysis" target="_blank" class="pi-lk">
+              GitHub <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pi">
+        <span class="pi-n">M-06</span>
+        <div>
+          <div class="pi-top">
+            <div class="pi-nm">PhonePe Insights &mdash; Data Engineering &amp; Dashboard</div>
+            <span class="pi-tg tb">Data Engineering</span>
+          </div>
+          <p class="pi-d">End-to-end ETL and visualization platform for PhonePe transaction data. Automated database setup and data loading scripts, MySQL backend via SQLAlchemy + PyMySQL, interactive Streamlit dashboard with Plotly/Seaborn for transaction analytics, plus Jupyter notebooks for EDA and deeper insights.</p>
+          <div class="pi-ft">
+            <div class="pi-tech"><span class="tt">Python</span><span class="tt">Streamlit</span><span class="tt">MySQL</span><span class="tt">SQLAlchemy</span><span class="tt">Plotly</span><span class="tt">Pandas</span></div>
+            <a href="https://github.com/Shravan157/phonepe-insights" target="_blank" class="pi-lk">
               GitHub <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
             </a>
           </div>

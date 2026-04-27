@@ -814,10 +814,8 @@ h1.ht{
   <div class="qw rev">
     <span class="qm">&ldquo;</span>
     <p class="qt">
-      The woods are lovely, dark and deep,<br>
-      But I have promises to keep,<br>
-      And <em>miles to go before I sleep,</em><br>
-      And miles to go before I sleep.
+      Life Update -
+        I'm up again
     </p>
     <div class="qs">&mdash; Robert Frost &middot; Stopping by Woods on a Snowy Evening</div>
   </div>

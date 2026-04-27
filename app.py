@@ -817,7 +817,7 @@ h1.ht{
       Life Update -
         I'm up again
     </p>
-    <div class="qs">&mdash; Robert Frost &middot; Stopping by Woods on a Snowy Evening</div>
+    
   </div>
 </div>
 

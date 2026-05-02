@@ -814,8 +814,8 @@ h1.ht{
   <div class="qw rev">
     <span class="qm">&ldquo;</span>
     <p class="qt">
-      Life Update -
-        I'm up again
+      AIML aur Fullstack ke bich me
+      chutiya banake choda hai bhai..
     </p>
     
   </div>

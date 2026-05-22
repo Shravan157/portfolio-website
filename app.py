@@ -1,9 +1,33 @@
-<!DOCTYPE html>
+import streamlit as st
+import streamlit.components.v1 as components
+
+st.set_page_config(
+    page_title="Shravan Parthe — Portfolio",
+    page_icon="⚡",
+    layout="wide",
+    initial_sidebar_state="collapsed",
+)
+
+st.markdown("""
+<style>
+  #MainMenu, header, footer, [data-testid="stToolbar"],
+  [data-testid="stDecoration"], [data-testid="stStatusWidget"],
+  .stDeployButton { visibility: hidden !important; display: none !important; }
+  .stApp { background: #fbfdfe !important; }
+  .block-container { padding: 0 !important; max-width: 100% !important; }
+  iframe { border: none !important; display: block !important; }
+  section[data-testid="stAppViewContainer"] > div { padding: 0 !important; }
+</style>
+""", unsafe_allow_html=True)
+
+RESUME_URL = "https://raw.githubusercontent.com/Shravan157/portfolio-website/master/resume_shravan2.pdf"
+
+HTML = """<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Shravan Parthe · Backend & AI Developer</title>
+<title>Shravan Parthe - Backend & AI Developer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -894,9 +918,9 @@
       </div>
       <div class="project-list reveal">
         <div class="project-row"><div class="project-idx">01</div><div><div class="project-title">MedoraX AI — Clinical Assistant</div><div class="project-desc">Multimodal assistant with voice, image analysis, structured diagnostics. Whisper, Llama-4-scout, multilingual support.</div><div class="project-stack"><span class="stack-badge">Python</span><span class="stack-badge">Gradio</span><span class="stack-badge">Groq API</span></div></div><div class="project-right"><span class="project-tag">Healthcare AI</span><a href="https://github.com/Shravan157/MedX-AI-Clinical-Assistant" target="_blank" class="project-link">GitHub ↗</a></div></div>
-        <div class="project-row"><div class="project-idx">02</div><div><div class="project-title">SahayLoan — Micro‑Lending</div><div class="project-desc">Flutter + FastAPI, Random Forest credit scoring, OCR KYC, Stripe EMI. Full-stack lending platform.</div><div class="project-stack"><span class="stack-badge">Flutter</span><span class="stack-badge">FastAPI</span><span class="stack-badge">Scikit-learn</span></div></div><div class="project-right"><span class="project-tag">FinTech</span><a href="https://github.com/Shravan157/Sahay-Loan" target="_blank" class="project-link">GitHub ↗</a></div></div>
-        <div class="project-row"><div class="project-idx">03</div><div><div class="project-title">SikshaSetu — Rural Education</div><div class="project-desc">Spring Boot + React, JWT/OAuth, role-based access, video SDK for virtual classrooms.</div><div class="project-stack"><span class="stack-badge">React</span><span class="stack-badge">Spring Boot</span><span class="stack-badge">MySQL</span></div></div><div class="project-right"><span class="project-tag">Full‑Stack</span><a href="https://github.com/Shravan157/SikshaSetu_Edu_App" target="_blank" class="project-link">GitHub ↗</a></div></div>
-        <div class="project-row"><div class="project-idx">04</div><div><div class="project-title">AI E‑Commerce Backend</div><div class="project-desc">Spring AI + Redis Vector DB for recommendations, GenAI chatbot, JWT auth.</div><div class="project-stack"><span class="stack-badge">Spring Boot</span><span class="stack-badge">Spring AI</span><span class="stack-badge">Redis</span></div></div><div class="project-right"><span class="project-tag">AI/Full‑Stack</span><a href="https://github.com/Shravan157" target="_blank" class="project-link">GitHub ↗</a></div></div>
+        <div class="project-row"><div class="project-idx">02</div><div><div class="project-title">SahayLoan — Micro-Lending</div><div class="project-desc">Flutter + FastAPI, Random Forest credit scoring, OCR KYC, Stripe EMI. Full-stack lending platform.</div><div class="project-stack"><span class="stack-badge">Flutter</span><span class="stack-badge">FastAPI</span><span class="stack-badge">Scikit-learn</span></div></div><div class="project-right"><span class="project-tag">FinTech</span><a href="https://github.com/Shravan157/Sahay-Loan" target="_blank" class="project-link">GitHub ↗</a></div></div>
+        <div class="project-row"><div class="project-idx">03</div><div><div class="project-title">SikshaSetu — Rural Education</div><div class="project-desc">Spring Boot + React, JWT/OAuth, role-based access, video SDK for virtual classrooms.</div><div class="project-stack"><span class="stack-badge">React</span><span class="stack-badge">Spring Boot</span><span class="stack-badge">MySQL</span></div></div><div class="project-right"><span class="project-tag">Full-Stack</span><a href="https://github.com/Shravan157/SikshaSetu_Edu_App" target="_blank" class="project-link">GitHub ↗</a></div></div>
+        <div class="project-row"><div class="project-idx">04</div><div><div class="project-title">AI E-Commerce Backend</div><div class="project-desc">Spring AI + Redis Vector DB for recommendations, GenAI chatbot, JWT auth.</div><div class="project-stack"><span class="stack-badge">Spring Boot</span><span class="stack-badge">Spring AI</span><span class="stack-badge">Redis</span></div></div><div class="project-right"><span class="project-tag">AI/Full-Stack</span><a href="https://github.com/Shravan157" target="_blank" class="project-link">GitHub ↗</a></div></div>
         <div class="project-row"><div class="project-idx">05</div><div><div class="project-title">Zomato Sentiment Analysis</div><div class="project-desc">NLP pipeline on 10k+ reviews: EDA, TF-IDF, Logistic Regression (best F1).</div><div class="project-stack"><span class="stack-badge">Python</span><span class="stack-badge">Scikit-learn</span><span class="stack-badge">NLTK</span></div></div><div class="project-right"><span class="project-tag">ML/NLP</span><a href="https://github.com/Shravan157/Zomato-Restaurant-Review-Sentiment-Analysis" target="_blank" class="project-link">GitHub ↗</a></div></div>
       </div>
     </div>
@@ -911,7 +935,7 @@
         <div class="section-sub">Where I've worked and what I'm studying</div>
       </div>
       <div class="exp-grid reveal">
-        <div class="exp-card"><div class="exp-period">APR 2026 — PRESENT · REMOTE</div><div class="exp-role">Data Science with Gen AI Intern</div><div class="exp-company">Innovexis</div><ul class="exp-list"><li>Real‑world LLM & generative AI integrations</li><li>Python, Pandas, Scikit‑learn for data analysis & models</li><li>Production‑level Gen AI workflows</li></ul><div class="exp-pill pill-green"><div class="pulse-dot"></div> Active Mission</div></div>
+        <div class="exp-card"><div class="exp-period">APR 2026 — PRESENT · REMOTE</div><div class="exp-role">Data Science with Gen AI Intern</div><div class="exp-company">Innovexis</div><ul class="exp-list"><li>Real-world LLM & generative AI integrations</li><li>Python, Pandas, Scikit-learn for data analysis & models</li><li>Production-level Gen AI workflows</li></ul><div class="exp-pill pill-green"><div class="pulse-dot"></div> Active Mission</div></div>
         <div class="exp-card"><div class="exp-period">JUN 2023 — MAY 2027 (EXPECTED)</div><div class="exp-role">B.Tech, Computer Science (AI & ML)</div><div class="exp-company">ViMEET · University of Mumbai</div><ul class="exp-list"><li>Specialization in AI/ML, DSA, Cloud, Microservices</li><li>Production projects alongside rigorous coursework</li></ul><div class="exp-pill pill-amber">CGPA 7.5 / 10.0</div></div>
       </div>
     </div>
@@ -958,4 +982,6 @@
   })();
 </script>
 </body>
-</html>
+</html>"""
+
+components.html(HTML, height=3800, scrolling=True)
